@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central Unit Manager Questionnaire</title>
+    
+    <!-- Central CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1 style="color: #0d3b66; text-align: center; margin-bottom: 20px;">
+        Central Unit Manager Questionnaire
+    </h1>
+
+    <!-- FORM ROUTING WRAPPER -->
+    <form id="centralUnitManagerForm" action="{{ url_for('submit_questionnaire', role_name='Central Unit Manager') }}" method="POST">
+
+        <!-- Hidden Coordinate Fields for GIS Map Plotting -->
+        <input type="hidden" id="site_latitude" name="site_latitude">
+        <input type="hidden" id="site_longitude" name="site_longitude">
+        <input type="hidden" id="site_city" name="site_city">
+        <input type="hidden" id="site_country" name="site_country">
+
+        <!-- ================= SITE INFORMATION ================= -->
+        <div class="question-card">
+            <h2 class="question-label" style="font-size: 1.2rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">
+                Site Information
+            </h2>
+
+            <div style="margin-top: 15px;">
+                <label class="question-label">Name</label>
+                <input type="text" id="siteName" name="site_name" placeholder="Enter Site Name" required>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <label class="question-label">Official Address</label>
+                <textarea id="officialAddress" name="official_address" rows="3" placeholder="Enter Official Address" required></textarea>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <label class="question-label">Daily Address (if different)</label>
+                <textarea id="dailyAddress" name="daily_address" rows="3" placeholder="Enter Daily Address"></textarea>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <label class="question-label">Street Address for Overnight Mail (if different)</label>
+                <textarea id="overnightAddress" name="overnight_address" rows="3" placeholder="Enter Overnight Mail Address"></textarea>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <label class="question-label">Phone Number</label>
+                <input type="tel" id="phoneNumber" name="phone_number" placeholder="Enter Phone Number" required>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <label class="question-label">Fax Number</label>
+                <input type="text" id="faxNumber" name="fax_number" placeholder="Enter Fax Number">
+            </div>
+
+            <div style="margin-top: 15px;">
+                <label class="question-label">Email Address</label>
+                <input type="email" id="emailAddress" name="email_address" placeholder="Enter Email Address" required>
+            </div>
+        </div>
+
+
+        <!-- ================= SECTION 1 ================= -->
+        <h2 style="color: #0d3b66; margin-top: 20px;">Section 1 - Site Management</h2>
+
+        <div class="question-card">
+            <label class="radio-inline">
+                <input type="checkbox" name="site_na" value="NA"> Section N/A
+            </label>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="question-card">
+            <label class="question-label">1. Who is responsible for the day-to-day management of the site?</label>
+            <div style="margin-top: 8px;">
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">Name / Title</label>
+                <input type="text" id="site_mgmt_resp" name="site_mgmt_resp" placeholder="Enter Name / Title">
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-card">
+            <label class="question-label">2. Does the site have a written Quality Management Plan (QMP)?</label>
+            <div class="options-group" style="margin-bottom: 15px;">
+                <label class="radio-inline">
+                    <input type="radio" name="qmp" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="qmp" value="No"> No
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="qmp" value="UNK"> UNK
+                </label>
+            </div>
+
+            <!-- IF YES BLOCK -->
+            <div style="background-color: #f8fafc; padding: 16px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 15px;">
+                <p style="font-size: 0.9rem; font-weight: 700; color: #0d3b66; margin-bottom: 10px;">If YES:</p>
+
+                <div style="margin-bottom: 12px;">
+                    <label style="font-size: 0.85rem; font-weight: 600; color: #334155; display: block; margin-bottom: 4px;">A. Has the QMP plan been implemented?</label>
+                    <div class="options-group" style="margin-top: 4px;">
+                        <label class="radio-inline"><input type="radio" name="qmp_implemented" value="Yes"> Yes</label>
+                        <label class="radio-inline"><input type="radio" name="qmp_implemented" value="No"> No</label>
+                        <label class="radio-inline"><input type="radio" name="qmp_implemented" value="UNK"> UNK</label>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 12px;">
+                    <label style="font-size: 0.85rem; font-weight: 600; color: #334155; display: block; margin-bottom: 4px;">B. Was a copy provided to the NIDCR?</label>
+                    <div class="options-group" style="margin-top: 4px;">
+                        <label class="radio-inline"><input type="radio" name="qmp_copy_nidcr" value="Yes"> Yes</label>
+                        <label class="radio-inline"><input type="radio" name="qmp_copy_nidcr" value="No"> No</label>
+                        <label class="radio-inline"><input type="radio" name="qmp_copy_nidcr" value="UNK"> UNK</label>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 12px;">
+                    <label style="font-size: 0.85rem; font-weight: 600; color: #334155; display: block; margin-bottom: 4px;">C. Date QMP was written or last reviewed</label>
+                    <input type="date" name="qmp_review_date">
+                </div>
+
+                <div>
+                    <label style="font-size: 0.85rem; font-weight: 600; color: #334155; display: block; margin-bottom: 4px;">D. Who has responsibility for the day-to-day implementation of the QMP?</label>
+                    <input type="text" id="qmp_resp_person" name="qmp_resp_person" placeholder="Enter Name / Title">
+                </div>
+            </div>
+
+            <!-- IF NO BLOCK -->
+            <div style="background-color: #f8fafc; padding: 16px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                <p style="font-size: 0.9rem; font-weight: 700; color: #0d3b66; margin-bottom: 10px;">If NO:</p>
+
+                <div style="margin-bottom: 12px;">
+                    <label style="font-size: 0.85rem; font-weight: 600; color: #334155; display: block; margin-bottom: 4px;">A. Does the site currently perform QM procedures?</label>
+                    <div class="options-group" style="margin-top: 4px;">
+                        <label class="radio-inline"><input type="radio" name="qm_perform" value="Yes"> Yes</label>
+                        <label class="radio-inline"><input type="radio" name="qm_perform" value="No"> No</label>
+                        <label class="radio-inline"><input type="radio" name="qm_perform" value="UNK"> UNK</label>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 12px;">
+                    <label style="font-size: 0.85rem; font-weight: 600; color: #334155; display: block; margin-bottom: 4px;">B. If Yes, describe the current QM process:</label>
+                    <textarea name="qm_process_desc" rows="3" placeholder="Describe current Quality Management process"></textarea>
+                </div>
+
+                <div>
+                    <label style="font-size: 0.85rem; font-weight: 600; color: #334155; display: block; margin-bottom: 4px;">C. Describe the communication methods available at this site:</label>
+                    <textarea name="communication_methods_desc" rows="3" placeholder="Describe communication methods"></textarea>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ================= SECTION 2 ================= -->
+        <h2 style="color: #0d3b66; margin-top: 20px;">Section 2 - Training</h2>
+
+        <div class="question-card">
+            <label class="radio-inline">
+                <input type="checkbox" name="training_na" value="NA"> Section N/A
+            </label>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="question-card">
+            <label class="question-label">1. Has the staff received training on ICH, GCP, and applicable regulatory training?</label>
+            <div class="options-group">
+                <label class="radio-inline">
+                    <input type="radio" name="q13_1" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="q13_1" value="No"> No
+                </label>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-card">
+            <label class="question-label">2. Has the site staff completed the required Human Subjects Protection Training?</label>
+            <div class="options-group">
+                <label class="radio-inline">
+                    <input type="radio" name="q13_2" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="q13_2" value="No"> No
+                </label>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-card">
+            <label class="question-label">3. Have key site personnel received training on NIDCR Investigator obligations for clinical research?</label>
+            <div class="options-group" style="margin-bottom: 15px;">
+                <label class="radio-inline">
+                    <input type="radio" name="q13_3" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="q13_3" value="No"> No
+                </label>
+            </div>
+
+            <div style="margin-bottom: 12px;">
+                <label style="font-size: 0.85rem; font-weight: 600; color: #334155; display: block; margin-bottom: 4px;">A. If Yes, how were they trained?</label>
+                <div class="options-group" style="margin-top: 4px;">
+                    <label class="radio-inline">
+                        <input type="checkbox" name="q13_3_method" value="Web-cast"> Web-cast
+                    </label>
+                    <label class="radio-inline">
+                        <input type="checkbox" name="q13_3_method" value="Investigator Meeting"> Investigator's Meeting
+                    </label>
+                    <label class="radio-inline">
+                        <input type="checkbox" name="q13_3_method" value="On-site Training"> On-site Training
+                    </label>
+                </div>
+            </div>
+
+            <div>
+                <label style="font-size: 0.85rem; font-weight: 600; color: #334155; display: block; margin-bottom: 4px;">B. If Yes, when was the training completed?</label>
+                <input type="date" name="q13_3_date">
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-card">
+            <label class="question-label">4. Has the staff identified any additional training needs for site personnel?</label>
+            <div class="options-group" style="margin-bottom: 15px;">
+                <label class="radio-inline">
+                    <input type="radio" name="q13_4" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="q13_4" value="No"> No
+                </label>
+            </div>
+
+            <div>
+                <label style="font-size: 0.85rem; font-weight: 600; color: #334155; display: block; margin-bottom: 4px;">A. If Yes, list training needs:</label>
+                <textarea name="q13_4_needs" rows="3" placeholder="Enter training needs"></textarea>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-card">
+            <label class="question-label">5. Are training records maintained for study staff, both general and study specific?</label>
+            <div class="options-group">
+                <label class="radio-inline">
+                    <input type="radio" name="q13_5" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="q13_5" value="No"> No
+                </label>
+            </div>
+        </div>
+
+
+        <!-- ================= SECTION 3 ================= -->
+        <h2 style="color: #0d3b66; margin-top: 20px;">Section 3 - International Sites</h2>
+
+        <div class="question-card">
+            <label class="radio-inline">
+                <input type="checkbox" name="international_na" value="NA"> Section N/A
+            </label>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="question-card">
+            <label class="question-label">1. Can the Principal Investigator and other site personnel communicate with the CRA in English during monitoring visits?</label>
+            <div class="options-group" style="margin-bottom: 15px;">
+                <label class="radio-inline">
+                    <input type="radio" name="q14_1" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="q14_1" value="No"> No
+                </label>
+            </div>
+
+            <div>
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">If No, describe method for working with an English speaking CRA:</label>
+                <textarea name="q14_1_desc" rows="3" placeholder="Describe method..."></textarea>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-card">
+            <label class="question-label">2. In which language(s) are the following documents written?</label>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 40%;">Document</th>
+                        <th style="width: 20%;">English</th>
+                        <th style="width: 40%;">Other</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CRFs</td>
+                        <td><input type="checkbox" name="q14_2_crf_lang" value="English"></td>
+                        <td><input type="text" name="q14_2_crf_lang_other" placeholder="Specify language"></td>
+                    </tr>
+                    <tr>
+                        <td>Source Documents</td>
+                        <td><input type="checkbox" name="q14_2_source_lang" value="English"></td>
+                        <td><input type="text" name="q14_2_source_lang_other" placeholder="Specify language"></td>
+                    </tr>
+                    <tr>
+                        <td>Regulatory Documents</td>
+                        <td><input type="checkbox" name="q14_2_reg_lang" value="English"></td>
+                        <td><input type="text" name="q14_2_reg_lang_other" placeholder="Specify language"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-card">
+            <label class="question-label">3. Is the consent process conducted in English?</label>
+            <div class="options-group" style="margin-bottom: 15px;">
+                <label class="radio-inline">
+                    <input type="radio" name="q14_3" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="q14_3" value="No"> No
+                </label>
+            </div>
+
+            <div>
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">If No, identify the language(s):</label>
+                <input type="text" name="q14_3_lang" placeholder="Enter language(s)">
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-card">
+            <label class="question-label">4. Describe the site's Informed Consent process.</label>
+            <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 8px;">
+                Is there a written document, oral description, or other procedure? Who will conduct the consent process?
+            </p>
+            <textarea name="q14_4_process_desc" rows="4" placeholder="Describe informed consent process..."></textarea>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-card">
+            <label class="question-label">5. Are all subjects literate?</label>
+            <div class="options-group" style="margin-bottom: 15px;">
+                <label class="radio-inline">
+                    <input type="radio" name="q14_5" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="q14_5" value="No"> No
+                </label>
+            </div>
+
+            <div>
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">
+                    If No, identify the procedure for obtaining and documenting the informed consent process, including whether a short oral consent document is available:
+                </label>
+                <textarea name="q14_5_literacy_proc" rows="4" placeholder="Enter procedure..."></textarea>
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question-card">
+            <label class="question-label">6. Are there local customs of which NIDCR should be made aware?</label>
+            <div class="options-group" style="margin-bottom: 15px;">
+                <label class="radio-inline">
+                    <input type="radio" name="q14_6" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="q14_6" value="No"> No
+                </label>
+            </div>
+
+            <div>
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">If Yes, describe:</label>
+                <textarea name="q14_6_customs_desc" rows="3" placeholder="Describe local customs..."></textarea>
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question-card">
+            <label class="question-label">7. Is there a community advisory board?</label>
+            <div class="options-group">
+                <label class="radio-inline">
+                    <input type="radio" name="q14_7" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="q14_7" value="No"> No
+                </label>
+            </div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question-card">
+            <label class="question-label">8. Does the community leader, or village or tribal chief understand and support the study?</label>
+            <div class="options-group">
+                <label class="radio-inline">
+                    <input type="radio" name="q14_8" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="q14_8" value="No"> No
+                </label>
+            </div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question-card">
+            <label class="question-label">9. Describe how the community has been engaged in the research process.</label>
+            <textarea name="q14_9_engagement_desc" rows="4" placeholder="Describe community engagement..."></textarea>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question-card">
+            <label class="question-label">10. Are there any country-specific requirements or potential difficulties that might interfere with regulatory approvals or subject enrollment?</label>
+            <div class="options-group" style="margin-bottom: 15px;">
+                <label class="radio-inline">
+                    <input type="radio" name="q14_10" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="q14_10" value="No"> No
+                </label>
+            </div>
+
+            <div>
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">If Yes, please describe:</label>
+                <textarea name="q14_10_difficulties_desc" rows="4" placeholder="Describe difficulties..."></textarea>
+            </div>
+        </div>
+
+        <!-- ================= SUBMIT BUTTON ================= -->
+        <div style="text-align: center; margin: 35px 0;">
+            <button type="submit" class="btn-submit" style="width: 100%; max-width: 360px; font-size: 1.05rem; padding: 14px;">
+                Submit Questionnaire
+            </button>
+        </div>
+
+    </form>
+</div>
+
+<!-- Auto-Geocoding Script for Address Coordinate Lookup -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("centralUnitManagerForm");
+  const addressInput = document.getElementById("officialAddress");
+
+  if (!form || !addressInput) return;
+
+  form.addEventListener("submit", async function(e) {
+    const address = addressInput.value.trim();
+    if (!address) return;
+
+    // Pause submission to fetch coordinates via OpenStreetMap Nominatim
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
+      const data = await response.json();
+
+      if (data && data.length > 0) {
+        document.getElementById("site_latitude").value = data[0].lat;
+        document.getElementById("site_longitude").value = data[0].lon;
+
+        const displayName = data[0].display_name.split(",");
+        document.getElementById("site_city").value = displayName[0] ? displayName[0].trim() : "Local Site";
+        document.getElementById("site_country").value = displayName[displayName.length - 1] ? displayName[displayName.length - 1].trim() : "USA";
+      } else {
+        // Fallback coordinates if address lookup yields no direct match
+        document.getElementById("site_latitude").value = "29.7604";
+        document.getElementById("site_longitude").value = "-95.3698";
+        document.getElementById("site_city").value = "Clinical Center";
+        document.getElementById("site_country").value = "USA";
+      }
+    } catch (err) {
+      console.warn("Geocoding lookup failed, submitting with fallback coordinates:", err);
+      document.getElementById("site_latitude").value = "29.7604";
+      document.getElementById("site_longitude").value = "-95.3698";
+      document.getElementById("site_city").value = "Clinical Center";
+      document.getElementById("site_country").value = "USA";
+    } finally {
+      // Resume form submit
+      form.submit();
+    }
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Principal Investigator Questionnaire</title>
+    
+    <!-- Central CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1 style="color: #0d3b66; text-align: center; margin-bottom: 20px;">Principal Investigator Questionnaire</h1>
+
+    <form id="piForm" action="/submit-questionnaire/Principal%20Investigator" method="POST">
+
+        <!-- Hidden Coordinate Fields for GIS Map Plotting -->
+        <input type="hidden" id="site_latitude" name="site_latitude">
+        <input type="hidden" id="site_longitude" name="site_longitude">
+        <input type="hidden" id="site_city" name="site_city">
+        <input type="hidden" id="site_country" name="site_country">
+
+        <!-- ================= SITE INFORMATION ================= -->
+        <div class="question-card">
+            <h2 class="question-label" style="font-size: 1.2rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">
+                Site Information
+            </h2>
+
+            <div style="margin-top: 15px;">
+                <label class="question-label">Site Name</label>
+                <input type="text" name="site_name" required>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <label class="question-label">Official Address</label>
+                <textarea id="official_address" name="official_address" rows="3" required placeholder="e.g., 123 Medical Center Blvd, Houston, TX 77030"></textarea>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <label class="question-label">Daily Address</label>
+                <textarea name="daily_address" rows="3"></textarea>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <label class="question-label">Overnight Address</label>
+                <textarea name="overnight_address" rows="3"></textarea>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <label class="question-label">Phone Number</label>
+                <input type="text" name="phone_number">
+            </div>
+
+            <div style="margin-top: 15px;">
+                <label class="question-label">Fax Number</label>
+                <input type="text" name="fax_number">
+            </div>
+
+            <div style="margin-top: 15px;">
+                <label class="question-label">Email Address</label>
+                <input type="email" name="email_address">
+            </div>
+        </div>
+
+
+        <!-- ================= SECTION 1 ================= -->
+        <h2 style="color: #0d3b66; margin-top: 20px;">Section 1 – Investigator and Staff Qualifications</h2>
+
+        <!-- Question 1 -->
+        <div class="question-card">
+            <label class="question-label">1. Where is the study being conducted?</label>
+            
+            <div style="margin-bottom: 15px;">
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">Location Name</label>
+                <input type="text" name="location_name">
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+                <label class="radio-inline">
+                    <input type="checkbox" name="study_location" value="Dental Clinic">
+                    Dental Clinic
+                </label>
+
+                <label class="radio-inline">
+                    <input type="checkbox" name="study_location" value="Outpatient Community">
+                    Outpatient Setting (Community Based)
+                </label>
+
+                <label class="radio-inline">
+                    <input type="checkbox" name="study_location" value="Outpatient Hospital">
+                    Outpatient Clinic (Hospital Based)
+                </label>
+
+                <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                    <label class="radio-inline" style="white-space: nowrap;">
+                        <input type="checkbox" name="study_location" value="Inpatient">
+                        Inpatient Unit:
+                    </label>
+                    <input type="text" name="inpatient_description" placeholder="Describe inpatient unit">
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                    <label class="radio-inline" style="white-space: nowrap;">
+                        <input type="checkbox" name="study_location" value="Other">
+                        Other:
+                    </label>
+                    <input type="text" name="other_location" placeholder="Describe other location">
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-card">
+            <label class="question-label">2. What is the research team's therapeutic specialty(ies)?</label>
+            <textarea name="therapeutic_specialties" rows="4" placeholder="Enter Therapeutic Specialties"></textarea>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-card">
+            <label class="question-label">3. Does the Principal Investigator have previous experience with?</label>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 45%;">Experience</th>
+                        <th style="width: 15%;">Yes</th>
+                        <th style="width: 15%;">No</th>
+                        <th style="width: 25%;">No. of Studies</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Clinical Research</td>
+                        <td><input type="radio" name="pi_clinical_research" value="Yes"></td>
+                        <td><input type="radio" name="pi_clinical_research" value="No"></td>
+                        <td><input type="number" name="pi_clinical_research_count"></td>
+                    </tr>
+                    <tr>
+                        <td>Study Therapeutic Area</td>
+                        <td><input type="radio" name="pi_therapeutic_area" value="Yes"></td>
+                        <td><input type="radio" name="pi_therapeutic_area" value="No"></td>
+                        <td><input type="number" name="pi_therapeutic_area_count"></td>
+                    </tr>
+                    <tr>
+                        <td>Study Subject Population</td>
+                        <td><input type="radio" name="pi_subject_population" value="Yes"></td>
+                        <td><input type="radio" name="pi_subject_population" value="No"></td>
+                        <td><input type="number" name="pi_subject_population_count"></td>
+                    </tr>
+                    <tr>
+                        <td>Test Article / Similar Product</td>
+                        <td><input type="radio" name="pi_test_article" value="Yes"></td>
+                        <td><input type="radio" name="pi_test_article" value="No"></td>
+                        <td><input type="number" name="pi_test_article_count"></td>
+                    </tr>
+                    <tr>
+                        <td>Similar Research Studies</td>
+                        <td><input type="radio" name="pi_similar_studies" value="Yes"></td>
+                        <td><input type="radio" name="pi_similar_studies" value="No"></td>
+                        <td><input type="number" name="pi_similar_studies_count"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-card">
+            <label class="question-label">4. Does the Study Coordinator have previous experience with?</label>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 45%;">Experience</th>
+                        <th style="width: 15%;">Yes</th>
+                        <th style="width: 15%;">No</th>
+                        <th style="width: 25%;">No. of Studies</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Clinical Research</td>
+                        <td><input type="radio" name="sc_clinical_research" value="Yes"></td>
+                        <td><input type="radio" name="sc_clinical_research" value="No"></td>
+                        <td><input type="number" name="sc_clinical_research_count"></td>
+                    </tr>
+                    <tr>
+                        <td>Study Therapeutic Area</td>
+                        <td><input type="radio" name="sc_therapeutic_area" value="Yes"></td>
+                        <td><input type="radio" name="sc_therapeutic_area" value="No"></td>
+                        <td><input type="number" name="sc_therapeutic_area_count"></td>
+                    </tr>
+                    <tr>
+                        <td>Study Subject Population</td>
+                        <td><input type="radio" name="sc_subject_population" value="Yes"></td>
+                        <td><input type="radio" name="sc_subject_population" value="No"></td>
+                        <td><input type="number" name="sc_subject_population_count"></td>
+                    </tr>
+                    <tr>
+                        <td>Test Article</td>
+                        <td><input type="radio" name="sc_test_article" value="Yes"></td>
+                        <td><input type="radio" name="sc_test_article" value="No"></td>
+                        <td><input type="number" name="sc_test_article_count"></td>
+                    </tr>
+                    <tr>
+                        <td>Similar Research Studies</td>
+                        <td><input type="radio" name="sc_similar_studies" value="Yes"></td>
+                        <td><input type="radio" name="sc_similar_studies" value="No"></td>
+                        <td><input type="number" name="sc_similar_studies_count"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-card">
+            <label class="question-label">5. What percentage of prior studies conducted by the site met enrollment goals and timelines?</label>
+            
+            <div style="margin-bottom: 12px;">
+                <label class="radio-inline">
+                    <input type="checkbox" name="enrollment_na" value="Yes"> N/A
+                </label>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">Percentage (%)</label>
+                <input type="number" name="enrollment_percentage" min="0" max="100">
+            </div>
+
+            <div>
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">If less than 100%, explain why:</label>
+                <textarea name="enrollment_reason" rows="3"></textarea>
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question-card">
+            <label class="question-label">6. How many studies are the PI and site personnel currently conducting with this population?</label>
+            
+            <div style="margin-bottom: 12px;">
+                <label class="radio-inline">
+                    <input type="checkbox" name="current_studies_na" value="Yes"> N/A
+                </label>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">Open and Enrolling</label>
+                <input type="number" name="open_enrolling">
+            </div>
+
+            <div>
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">Follow-up Phase</label>
+                <input type="number" name="follow_up_phase">
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question-card">
+            <label class="question-label">7. Does the PI and site personnel have sufficient time to:</label>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 70%;">Activity</th>
+                        <th style="width: 15%;">Yes</th>
+                        <th style="width: 15%;">No</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Conduct the Study</td>
+                        <td><input type="radio" name="conduct_study" value="Yes"></td>
+                        <td><input type="radio" name="conduct_study" value="No"></td>
+                    </tr>
+                    <tr>
+                        <td>Monitoring Visits</td>
+                        <td><input type="radio" name="monitoring_visits" value="Yes"></td>
+                        <td><input type="radio" name="monitoring_visits" value="No"></td>
+                    </tr>
+                    <tr>
+                        <td>Attend Study Meetings</td>
+                        <td><input type="radio" name="study_meetings" value="Yes"></td>
+                        <td><input type="radio" name="study_meetings" value="No"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question-card">
+            <label class="question-label">8. Will a licensed dentist or clinician be available on-site?</label>
+            <div class="options-group">
+                <label class="radio-inline">
+                    <input type="radio" name="licensed_clinician" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="licensed_clinician" value="No"> No
+                </label>
+            </div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question-card">
+            <label class="question-label">9. Has the investigator or site ever been inspected by a regulatory agency?</label>
+            <div class="options-group" style="margin-bottom: 15px;">
+                <label class="radio-inline">
+                    <input type="radio" name="regulatory_inspection" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="regulatory_inspection" value="No"> No
+                </label>
+            </div>
+
+            <div style="margin-bottom: 12px;">
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">Inspection Date</label>
+                <input type="date" name="inspection_date">
+            </div>
+
+            <div style="margin-bottom: 12px;">
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">Agency Name</label>
+                <input type="text" name="agency_name">
+            </div>
+
+            <div>
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">Who was inspected?</label>
+                <input type="text" name="inspected_person">
+            </div>
+        </div>
+
+
+        <!-- ================= SECTION 2 ================= -->
+        <h2 style="color: #0d3b66; margin-top: 20px;">Section 2 – Study Populations and Accrual Goals</h2>
+
+        <!-- Question 1 -->
+        <div class="question-card">
+            <label class="question-label">1. Does the site intend to advertise for clinical study subjects?</label>
+            <div class="options-group">
+                <label class="radio-inline">
+                    <input type="radio" name="advertise_subjects" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="advertise_subjects" value="No"> No
+                </label>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-card">
+            <label class="question-label">2. What languages are spoken in the target community?</label>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 40%;">Language</th>
+                        <th style="width: 30%;">% General Population</th>
+                        <th style="width: 30%;">% Target Population</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" name="language1"></td>
+                        <td><input type="number" name="language1_general"></td>
+                        <td><input type="number" name="language1_target"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="language2"></td>
+                        <td><input type="number" name="language2_general"></td>
+                        <td><input type="number" name="language2_target"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="language3"></td>
+                        <td><input type="number" name="language3_general"></td>
+                        <td><input type="number" name="language3_target"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-card">
+            <label class="question-label">3. Do investigator and site personnel have adequate language capabilities?</label>
+            <div class="options-group">
+                <label class="radio-inline">
+                    <input type="radio" name="language_capability" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="language_capability" value="No"> No
+                </label>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-card">
+            <label class="question-label">4. Will consent documents or advertisements be required in additional languages?</label>
+            <div class="options-group" style="margin-bottom: 15px;">
+                <label class="radio-inline">
+                    <input type="radio" name="additional_languages" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="additional_languages" value="No"> No
+                </label>
+            </div>
+
+            <div>
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">Translation Method</label>
+                <textarea name="translation_method" rows="3"></textarea>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-card">
+            <label class="question-label">5. Are there foreseeable obstacles to enrollment?</label>
+            <div class="options-group" style="margin-bottom: 15px;">
+                <label class="radio-inline">
+                    <input type="radio" name="enrollment_obstacles" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="enrollment_obstacles" value="No"> No
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="enrollment_obstacles" value="NA"> N/A
+                </label>
+            </div>
+
+            <div>
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">Describe Obstacles</label>
+                <textarea name="obstacle_description" rows="3"></textarea>
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question-card">
+            <label class="question-label">6. When will the site conduct study screening and protocol visits?</label>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <label class="radio-inline">
+                    <input type="radio" name="screening_schedule" value="Business Hours"> Business Hours
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="screening_schedule" value="Evenings"> Evenings
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="screening_schedule" value="Weekends"> Weekends
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="screening_schedule" value="Flexible"> Flexible
+                </label>
+            </div>
+        </div>
+
+
+        <!-- ================= SECTION 3 ================= -->
+        <h2 style="color: #0d3b66; margin-top: 20px;">Section 3 – Protocol and Study Design</h2>
+
+        <div class="question-card">
+            <label class="question-label">1. Do you or any staff require additional protocol training?</label>
+            <div class="options-group" style="margin-bottom: 15px;">
+                <label class="radio-inline">
+                    <input type="radio" name="additional_training" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="additional_training" value="No"> No
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="additional_training" value="NA"> N/A
+                </label>
+            </div>
+
+            <label class="question-label" style="font-size: 0.9rem; margin-top: 15px;">If Yes, indicate the required training areas:</label>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 70%;">Training Area</th>
+                        <th style="width: 15%;">Yes</th>
+                        <th style="width: 15%;">No</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Study Objectives</td>
+                        <td><input type="radio" name="study_objectives" value="Yes"></td>
+                        <td><input type="radio" name="study_objectives" value="No"></td>
+                    </tr>
+                    <tr>
+                        <td>Inclusion / Exclusion Criteria</td>
+                        <td><input type="radio" name="inclusion_exclusion" value="Yes"></td>
+                        <td><input type="radio" name="inclusion_exclusion" value="No"></td>
+                    </tr>
+                    <tr>
+                        <td>Study Procedures</td>
+                        <td><input type="radio" name="study_procedures" value="Yes"></td>
+                        <td><input type="radio" name="study_procedures" value="No"></td>
+                    </tr>
+                    <tr>
+                        <td>Participant Follow-up</td>
+                        <td><input type="radio" name="participant_followup" value="Yes"></td>
+                        <td><input type="radio" name="participant_followup" value="No"></td>
+                    </tr>
+                    <tr>
+                        <td>Laboratory Procedures</td>
+                        <td><input type="radio" name="laboratory_procedures" value="Yes"></td>
+                        <td><input type="radio" name="laboratory_procedures" value="No"></td>
+                    </tr>
+                    <tr>
+                        <td>Specimen Shipping</td>
+                        <td><input type="radio" name="specimen_shipping" value="Yes"></td>
+                        <td><input type="radio" name="specimen_shipping" value="No"></td>
+                    </tr>
+                    <tr>
+                        <td>AE / SAE Reporting</td>
+                        <td><input type="radio" name="ae_reporting" value="Yes"></td>
+                        <td><input type="radio" name="ae_reporting" value="No"></td>
+                    </tr>
+                    <tr>
+                        <td>Staff Responsibilities</td>
+                        <td><input type="radio" name="staff_responsibilities" value="Yes"></td>
+                        <td><input type="radio" name="staff_responsibilities" value="No"></td>
+                    </tr>
+                    <tr>
+                        <td>Protocol Compliance</td>
+                        <td><input type="radio" name="protocol_compliance" value="Yes"></td>
+                        <td><input type="radio" name="protocol_compliance" value="No"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <!-- ================= SECTION 4 ================= -->
+        <h2 style="color: #0d3b66; margin-top: 20px;">Section 4 – Clinical Monitoring</h2>
+
+        <!-- Question 1 -->
+        <div class="question-card">
+            <label class="question-label">1. Will the PI and staff allow monitoring visits at least once per year?</label>
+            <div class="options-group">
+                <label class="radio-inline">
+                    <input type="radio" name="annual_monitoring" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="annual_monitoring" value="No"> No
+                </label>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-card">
+            <label class="question-label">2. Will the monitor have adequate workspace?</label>
+            <div class="options-group">
+                <label class="radio-inline">
+                    <input type="radio" name="adequate_workspace" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="adequate_workspace" value="No"> No
+                </label>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-card">
+            <label class="question-label">3. Will the monitor have access to medical records?</label>
+            <div class="options-group">
+                <label class="radio-inline">
+                    <input type="radio" name="medical_record_access" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="medical_record_access" value="No"> No
+                </label>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-card">
+            <label class="question-label">4. Which source documents are maintained in the participant medical record?</label>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <label class="radio-inline">
+                    <input type="checkbox" name="source_documents" value="Consent Documents"> Consent Documents
+                </label>
+                <label class="radio-inline">
+                    <input type="checkbox" name="source_documents" value="Progress Notes"> Progress Notes
+                </label>
+                <label class="radio-inline">
+                    <input type="checkbox" name="source_documents" value="Medical History"> Medical History
+                </label>
+                <label class="radio-inline">
+                    <input type="checkbox" name="source_documents" value="Clinical Reports"> Clinical Reports
+                </label>
+                <label class="radio-inline">
+                    <input type="checkbox" name="source_documents" value="Study Worksheets"> Study Worksheets
+                </label>
+                <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                    <label class="radio-inline" style="white-space: nowrap;">
+                        <input type="checkbox" name="source_documents" value="Other"> Other:
+                    </label>
+                    <input type="text" name="source_document_other" placeholder="Specify other document type">
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ================= SECTION 5 ================= -->
+        <h2 style="color: #0d3b66; margin-top: 20px;">Section 5 – Training</h2>
+
+        <!-- Question 1 -->
+        <div class="question-card">
+            <label class="question-label">1. Has the staff received ICH/GCP and applicable regulatory training?</label>
+            <div class="options-group">
+                <label class="radio-inline">
+                    <input type="radio" name="ich_gcp_training" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="ich_gcp_training" value="No"> No
+                </label>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-card">
+            <label class="question-label">2. Has the site staff completed Human Subjects Protection Training?</label>
+            <div class="options-group">
+                <label class="radio-inline">
+                    <input type="radio" name="human_subject_training" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="human_subject_training" value="No"> No
+                </label>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-card">
+            <label class="question-label">3. Have key personnel received NIDCR Investigator training?</label>
+            <div class="options-group" style="margin-bottom: 15px;">
+                <label class="radio-inline">
+                    <input type="radio" name="nidcr_training" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="nidcr_training" value="No"> No
+                </label>
+            </div>
+
+            <div style="margin-bottom: 12px;">
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">Training Method</label>
+                <select name="training_method">
+                    <option value="">-- Select Training Method --</option>
+                    <option value="Webcast">Webcast</option>
+                    <option value="Investigator Meeting">Investigator Meeting</option>
+                    <option value="On-site Training">On-site Training</option>
+                </select>
+            </div>
+
+            <div>
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">Training Date</label>
+                <input type="date" name="training_date">
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-card">
+            <label class="question-label">4. Additional Training Needs</label>
+            <div class="options-group" style="margin-bottom: 15px;">
+                <label class="radio-inline">
+                    <input type="radio" name="additional_training_needed" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="additional_training_needed" value="No"> No
+                </label>
+            </div>
+
+            <div>
+                <textarea name="training_needs" rows="3" placeholder="Describe additional training requirements"></textarea>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-card">
+            <label class="question-label">5. Are training records maintained?</label>
+            <div class="options-group">
+                <label class="radio-inline">
+                    <input type="radio" name="training_records" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="training_records" value="No"> No
+                </label>
+            </div>
+        </div>
+
+
+        <!-- ================= SECTION 6 ================= -->
+        <h2 style="color: #0d3b66; margin-top: 20px;">Section 6 – International Sites</h2>
+
+        <!-- Question 1 -->
+        <div class="question-card">
+            <label class="question-label">1. Can the PI and staff communicate with the CRA in English?</label>
+            <div class="options-group" style="margin-bottom: 15px;">
+                <label class="radio-inline">
+                    <input type="radio" name="english_communication" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="english_communication" value="No"> No
+                </label>
+            </div>
+
+            <div>
+                <textarea name="communication_method" rows="3" placeholder="If No, describe communication method"></textarea>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-card">
+            <label class="question-label">2. What language are CRFs written in?</label>
+            <input type="text" name="crf_language" placeholder="Enter CRF language">
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-card">
+            <label class="question-label">3. What language are Source Documents written in?</label>
+            <input type="text" name="source_language" placeholder="Enter source documents language">
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-card">
+            <label class="question-label">4. What language are Regulatory Documents written in?</label>
+            <input type="text" name="regulatory_language" placeholder="Enter regulatory documents language">
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-card">
+            <label class="question-label">5. Is the consent process conducted in English?</label>
+            <div class="options-group" style="margin-bottom: 15px;">
+                <label class="radio-inline">
+                    <input type="radio" name="english_consent" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="english_consent" value="No"> No
+                </label>
+            </div>
+
+            <div>
+                <input type="text" name="consent_language" placeholder="If No, specify language">
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question-card">
+            <label class="question-label">6. Describe the site's informed consent process.</label>
+            <textarea name="consent_process" rows="4" placeholder="Describe informed consent process"></textarea>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question-card">
+            <label class="question-label">7. Are all subjects literate?</label>
+            <div class="options-group" style="margin-bottom: 15px;">
+                <label class="radio-inline">
+                    <input type="radio" name="subject_literacy" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="subject_literacy" value="No"> No
+                </label>
+            </div>
+
+            <div>
+                <textarea name="literacy_procedure" rows="3" placeholder="Describe procedure for non-literate subjects"></textarea>
+            </div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question-card">
+            <label class="question-label">8. Are there local customs that should be considered?</label>
+            <div class="options-group" style="margin-bottom: 15px;">
+                <label class="radio-inline">
+                    <input type="radio" name="local_customs" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="local_customs" value="No"> No
+                </label>
+            </div>
+
+            <div>
+                <textarea name="custom_description" rows="3" placeholder="Describe local customs"></textarea>
+            </div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question-card">
+            <label class="question-label">9. Is there a Community Advisory Board?</label>
+            <div class="options-group">
+                <label class="radio-inline">
+                    <input type="radio" name="community_board" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="community_board" value="No"> No
+                </label>
+            </div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question-card">
+            <label class="question-label">10. Does the community leader support the study?</label>
+            <div class="options-group">
+                <label class="radio-inline">
+                    <input type="radio" name="community_support" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="community_support" value="No"> No
+                </label>
+            </div>
+        </div>
+
+        <!-- Question 11 -->
+        <div class="question-card">
+            <label class="question-label">11. Describe community engagement.</label>
+            <textarea name="community_engagement" rows="4" placeholder="Describe community engagement strategy"></textarea>
+        </div>
+
+        <!-- Question 12 -->
+        <div class="question-card">
+            <label class="question-label">12. Are there country-specific regulatory requirements?</label>
+            <div class="options-group" style="margin-bottom: 15px;">
+                <label class="radio-inline">
+                    <input type="radio" name="country_requirements" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="country_requirements" value="No"> No
+                </label>
+            </div>
+
+            <div>
+                <textarea name="country_requirement_description" rows="4" placeholder="Describe country-specific regulatory requirements"></textarea>
+            </div>
+        </div>
+
+        <!-- ================= SUBMIT BUTTON ================= -->
+        <div style="text-align: center; margin: 35px 0;">
+            <button type="submit" class="btn-submit" style="width: 100%; max-width: 320px; font-size: 1.05rem; padding: 14px;">
+                Submit Questionnaire
+            </button>
+        </div>
+
+    </form>
+
+</div>
+
+<!-- Auto-Geocoding Script for Address Coordinate Lookup -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("piForm");
+  const addressInput = document.getElementById("official_address");
+
+  if (!form || !addressInput) return;
+
+  form.addEventListener("submit", async function(e) {
+    const address = addressInput.value.trim();
+    if (!address) return;
+
+    // Pause submission to fetch coordinates via OpenStreetMap Nominatim
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
+      const data = await response.json();
+
+      if (data && data.length > 0) {
+        document.getElementById("site_latitude").value = data[0].lat;
+        document.getElementById("site_longitude").value = data[0].lon;
+
+        const displayName = data[0].display_name.split(",");
+        document.getElementById("site_city").value = displayName[0] ? displayName[0].trim() : "Local Site";
+        document.getElementById("site_country").value = displayName[displayName.length - 1] ? displayName[displayName.length - 1].trim() : "USA";
+      } else {
+        // Fallback coordinates if address lookup yields no direct match
+        document.getElementById("site_latitude").value = "29.7604";
+        document.getElementById("site_longitude").value = "-95.3698";
+        document.getElementById("site_city").value = "Clinical Center";
+        document.getElementById("site_country").value = "USA";
+      }
+    } catch (err) {
+      console.warn("Geocoding lookup failed, submitting with fallback coordinates:", err);
+      document.getElementById("site_latitude").value = "29.7604";
+      document.getElementById("site_longitude").value = "-95.3698";
+      document.getElementById("site_city").value = "Clinical Center";
+      document.getElementById("site_country").value = "USA";
+    } finally {
+      // Resume form submit
+      form.submit();
+    }
+  });
+});
+</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinovo - Clinical Excellence</title>
+    
+    <!-- Link to Centralized Blue Theme CSS -->
+     
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <!-- Google Fonts for Clean Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="brand-logo">
+                <div class="logo-icon">✓</div>
+                <div class="logo-text">
+                    <span class="brand-name">clinovo</span>
+                    <span class="brand-tagline">CLINICAL EXCELLENCE</span>
+                </div>
+            </div>
+
+            <nav class="nav-links">
+                <a href="#" class="active">HOME</a>
+                <a href="#">ABOUT US</a>
+                <a href="#">SOLUTIONS</a>
+                <a href="#">CAREERS</a>
+                <a href="#">CONTACT</a>
+            </nav>
+
+            <button class="btn-top-portal" onclick="scrollToLogin()">PORTAL LOGIN</button>
+        </div>
+    </header>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+            <div class="welcome-badge">
+                <span class="badge-dot"></span> WELCOME TO CLINOVO
+            </div>
+
+           
+
+            <h1> Accelerating Your Clinical Trials</h1>
+<br>
+            <div class="info-card">
+                <p>
+                    At Clinovo, we help sponsors deliver clinical trials faster, smarter, and with fewer barriers. 
+                    By combining expert teams, flexible resourcing models, and intelligent automation, we 
+                    ensure your workforce is optimized for every stage of your trial.
+                </p>
+            </div>
+
+            <!-- ================= ACTION & LOGIN BLOCK ================= -->
+            <div class="portal-action-container" id="loginBlock">
+                
+                <div class="hero-buttons">
+                    <button class="btn-access-portal" onclick="toggleLoginCard()">ACCESS PORTAL &rarr;</button>
+                    <a href="#" class="btn-learn-more">LEARN MORE</a>
+                </div>
+
+                <!-- LOGIN BOX (Positioned Right Next To Access Portal) -->
+                <div class="login-card" id="loginCard">
+                    <h3>Portal Sign In</h3>
+                    <form action="/login" method="POST">
+                        <div class="form-group">
+                            <label for="username">Username / Email</label>
+                            <input type="text" id="username" name="username" placeholder="Enter username" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" placeholder="Enter password" required>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-login-submit">Login to Portal</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        function toggleLoginCard() {
+            const card = document.getElementById('loginCard');
+            card.classList.toggle('active');
+        }
+
+        function scrollToLogin() {
+            const card = document.getElementById('loginCard');
+            card.classList.add('active');
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    </script>
+
+</body>
+</html>

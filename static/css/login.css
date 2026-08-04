@@ -1,0 +1,329 @@
+/* ==========================================================
+   GLOBAL RESET & TYPOGRAPHY
+   ========================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: #1e293b;
+    background-color: #f8fafc;
+    overflow-x: hidden;
+}
+
+/* ==========================================================
+   HEADER / NAVBAR
+   ========================================================== */
+.navbar {
+    background-color: #ffffff;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.nav-container {
+    width: 90%;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    width: 38px;
+    height: 38px;
+    background-color: #007c89;
+    color: #ffffff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-name {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #0f2b48;
+    line-height: 1;
+}
+
+.brand-tagline {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #007c89;
+    letter-spacing: 1.2px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #475569;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: #007c89;
+}
+
+.btn-top-portal {
+    background-color: #007c89;
+    color: #ffffff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-top-portal:hover {
+    background-color: #005a64;
+}
+
+/* ==========================================================
+   HERO SECTION WITH BACKGROUND
+   ========================================================== */
+.hero-section {
+    position: relative;
+    min-height: calc(100vh - 75px);
+    background: url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&q=80&w=1920') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(3px);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 850px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.welcome-badge {
+    background: #e6f4f5;
+    color: #007c89;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    letter-spacing: 0.8px;
+}
+
+.badge-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #007c89;
+    border-radius: 50%;
+}
+
+.hero-title {
+    font-size: 3.2rem;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.15;
+    margin-bottom: 8px;
+}
+
+.highlight-text {
+    color: #007c89;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 25px;
+}
+
+.info-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 25px 35px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    margin-bottom: 35px;
+    max-width: 720px;
+}
+
+.info-card p {
+    color: #475569;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+/* ==========================================================
+   PORTAL ACTION & LOGIN CARD BLOCK
+   ========================================================== */
+.portal-action-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn-access-portal {
+    background-color: #007c89;
+    color: #ffffff;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 124, 137, 0.3);
+    transition: all 0.2s ease;
+}
+
+.btn-access-portal:hover {
+    background-color: #005a64;
+    transform: translateY(-2px);
+}
+
+.btn-learn-more {
+    background-color: #ffffff;
+    color: #007c89;
+    border: 1px solid #cbd5e1;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.2s;
+}
+
+.btn-learn-more:hover {
+    background-color: #f1f5f9;
+}
+
+/* LOGIN BOX SLIDE-DOWN / OVERLAY */
+.login-card {
+    width: 100%;
+    max-width: 380px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    border-top: 4px solid #007c89;
+    text-align: left;
+    margin-top: 10px;
+    display: none; /* Toggled via JavaScript or made visible directly */
+    animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.login-card.active {
+    display: block;
+}
+
+.login-card h3 {
+    color: #0f172a;
+    font-size: 1.2rem;
+    margin-bottom: 18px;
+    text-align: center;
+}
+
+.login-card .form-group {
+    margin-bottom: 15px;
+}
+
+.login-card label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 6px;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.login-card input:focus {
+    border-color: #007c89;
+    box-shadow: 0 0 0 3px rgba(0, 124, 137, 0.15);
+}
+
+.btn-login-submit {
+    width: 100%;
+    background-color: #007c89;
+    color: #ffffff;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+}
+
+.btn-login-submit:hover {
+    background-color: #005a64;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

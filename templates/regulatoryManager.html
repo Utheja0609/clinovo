@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regulatory Manager Questionnaire</title>
+    
+    <!-- Central CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1 style="color: #0d3b66; text-align: center; margin-bottom: 20px;">
+        Regulatory Manager Questionnaire
+    </h1>
+
+    <form id="regulatoryManagerForm" action="{{ url_for('submit_questionnaire', role_name='Regulatory Manager') }}" method="POST">
+
+        <!-- Hidden Coordinate Fields for GIS Map Plotting -->
+        <input type="hidden" id="site_latitude" name="site_latitude">
+        <input type="hidden" id="site_longitude" name="site_longitude">
+        <input type="hidden" id="site_city" name="site_city">
+        <input type="hidden" id="site_country" name="site_country">
+
+        <!-- ================= SITE INFORMATION ================= -->
+        <div class="question-card">
+            <h2 class="question-label" style="font-size: 1.2rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px;">
+                Site Information
+            </h2>
+
+            <div style="margin-top: 15px;">
+                <label class="question-label">Name</label>
+                <input type="text" id="siteName" name="site_name" placeholder="Enter Site Name" required>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <label class="question-label">Official Address</label>
+                <textarea id="officialAddress" name="official_address" rows="3" placeholder="Enter Official Address" required></textarea>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <label class="question-label">Daily Address (if different)</label>
+                <textarea id="dailyAddress" name="daily_address" rows="3" placeholder="Enter Daily Address"></textarea>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <label class="question-label">Street Address for Overnight Mail (if different)</label>
+                <textarea id="overnightAddress" name="overnight_address" rows="3" placeholder="Enter Overnight Mail Address"></textarea>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <label class="question-label">Phone Number</label>
+                <input type="tel" id="phoneNumber" name="phone_number" placeholder="Enter Phone Number" required>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <label class="question-label">Fax Number</label>
+                <input type="text" id="faxNumber" name="fax_number" placeholder="Enter Fax Number">
+            </div>
+
+            <div style="margin-top: 15px;">
+                <label class="question-label">Email Address</label>
+                <input type="email" id="emailAddress" name="email_address" placeholder="Enter Email Address" required>
+            </div>
+        </div>
+
+
+        <!-- ================= SECTION XI ================= -->
+        <h2 style="color: #0d3b66; margin-top: 20px;">Section XI - IRB/IEC and Regulatory Requirements</h2>
+
+        <div class="question-card">
+            <label class="radio-inline">
+                <input type="checkbox" name="irb_na" value="NA"> Section N/A
+            </label>
+        </div>
+
+        <!-- QUESTION 1 -->
+        <div class="question-card">
+            <label class="question-label">1. Who is responsible for maintenance of the site's regulatory files?</label>
+            <div style="margin-top: 8px;">
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">Name / Title</label>
+                <input type="text" id="regFilesResp" name="reg_files_resp" placeholder="Enter Name / Title">
+            </div>
+        </div>
+
+        <!-- QUESTION 2 -->
+        <div class="question-card">
+            <label class="question-label">2. List the IRB/IEC(s) that the site expects to use on this study.</label>
+            <div style="margin-top: 8px;">
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">IRB / IEC Name</label>
+                <input type="text" id="irbNames" name="irb_names" placeholder="Enter IRB / IEC Name">
+            </div>
+        </div>
+
+        <!-- QUESTION 3 -->
+        <div class="question-card">
+            <label class="question-label">3. How frequently does the IRB/IEC meet?</label>
+            <input type="text" name="irb_meeting_freq" placeholder="Example: Monthly">
+        </div>
+
+        <!-- QUESTION 4 -->
+        <div class="question-card">
+            <label class="question-label">4. What is the date of the IRB/IEC meeting at which the protocol may be considered?</label>
+            <input type="date" name="irb_meeting_date">
+        </div>
+
+        <!-- QUESTION 5 -->
+        <div class="question-card">
+            <label class="question-label">5. What is the expected timeframe between meeting and issue of written approval by the IRB/IEC?</label>
+            <input type="text" name="irb_approval_timeframe" placeholder="Enter Timeframe">
+        </div>
+
+        <!-- QUESTION 6 -->
+        <div class="question-card">
+            <label class="question-label">6. Are there any obstacles to timely IRB/IEC approval?</label>
+            <div class="options-group" style="margin-bottom: 15px;">
+                <label class="radio-inline">
+                    <input type="radio" name="irb_obstacles" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="irb_obstacles" value="No"> No
+                </label>
+            </div>
+
+            <div>
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">If Yes, explain obstacles:</label>
+                <textarea id="irbObstaclesDesc" name="irb_obstacles_desc" rows="3" placeholder="Describe obstacles"></textarea>
+            </div>
+        </div>
+
+        <!-- QUESTION 7 -->
+        <div class="question-card">
+            <label class="question-label">7. Will submission to additional site committees (e.g. Research, Bio-Safety) be required?</label>
+            <div class="options-group" style="margin-bottom: 15px;">
+                <label class="radio-inline">
+                    <input type="radio" name="add_committees" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="add_committees" value="No"> No
+                </label>
+            </div>
+
+            <!-- Sub-question A -->
+            <div style="margin-bottom: 15px;">
+                <label style="font-size: 0.85rem; font-weight: 600; color: #334155; display: block; margin-bottom: 4px;">
+                    A. If Yes, list the names of the committees and any anticipated time constraints:
+                </label>
+                <input type="text" name="add_committees_desc" placeholder="Committee Name & constraints">
+            </div>
+
+            <!-- Sub-question B -->
+            <div>
+                <label style="font-size: 0.85rem; font-weight: 600; color: #334155; display: block; margin-bottom: 4px;">
+                    B. Do submissions need to be completed in a certain order?
+                </label>
+                <div class="options-group" style="margin-top: 4px; margin-bottom: 8px;">
+                    <label class="radio-inline">
+                        <input type="radio" name="add_committees_order_flag" value="Yes"> Yes
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="add_committees_order_flag" value="No"> No
+                    </label>
+                </div>
+
+                <label style="font-size: 0.85rem; color: #475569; display: block; margin-bottom: 4px;">If Yes, provide the order:</label>
+                <textarea id="addCommitteesOrderDesc" name="add_committees_order_desc" rows="3" placeholder="Describe submission order"></textarea>
+            </div>
+        </div>
+
+        <!-- QUESTION 8 -->
+        <div class="question-card">
+            <label class="question-label">8. Does the site's IRB/IEC have a Federalwide Assurance (FWA)?</label>
+            <div class="options-group">
+                <label class="radio-inline">
+                    <input type="radio" name="fwa_status" value="Yes"> Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="fwa_status" value="No"> No
+                </label>
+            </div>
+        </div>
+
+        <!-- ================= SUBMIT BUTTON ================= -->
+        <div style="text-align: center; margin: 35px 0;">
+            <button type="submit" class="btn-submit" style="width: 100%; max-width: 360px; font-size: 1.05rem; padding: 14px;">
+                Submit Questionnaire
+            </button>
+        </div>
+
+    </form>
+
+</div>
+
+<!-- Auto-Geocoding Script for Address Coordinate Lookup -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("regulatoryManagerForm");
+  const addressInput = document.getElementById("officialAddress");
+
+  if (!form || !addressInput) return;
+
+  form.addEventListener("submit", async function(e) {
+    const address = addressInput.value.trim();
+    if (!address) return;
+
+    // Pause submission to fetch coordinates via OpenStreetMap Nominatim
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`);
+      const data = await response.json();
+
+      if (data && data.length > 0) {
+        document.getElementById("site_latitude").value = data[0].lat;
+        document.getElementById("site_longitude").value = data[0].lon;
+
+        const displayName = data[0].display_name.split(",");
+        document.getElementById("site_city").value = displayName[0] ? displayName[0].trim() : "Local Site";
+        document.getElementById("site_country").value = displayName[displayName.length - 1] ? displayName[displayName.length - 1].trim() : "USA";
+      } else {
+        // Fallback coordinates if address lookup yields no direct match
+        document.getElementById("site_latitude").value = "29.7604";
+        document.getElementById("site_longitude").value = "-95.3698";
+        document.getElementById("site_city").value = "Clinical Center";
+        document.getElementById("site_country").value = "USA";
+      }
+    } catch (err) {
+      console.warn("Geocoding lookup failed, submitting with fallback coordinates:", err);
+      document.getElementById("site_latitude").value = "29.7604";
+      document.getElementById("site_longitude").value = "-95.3698";
+      document.getElementById("site_city").value = "Clinical Center";
+      document.getElementById("site_country").value = "USA";
+    } finally {
+      // Resume form submit
+      form.submit();
+    }
+  });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Role - Clinovo Assessment System</title>
+    
+    <!-- Centralized CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/role_selection.css') }}">
+</head>
+<body>
+
+<div class="container" style="max-width: 520px; margin-top: 60px;">
+    <h1>Clinovo Assessment System</h1>
+
+    <h2 style="text-align: center; font-size: 1.25rem; border-bottom: none; margin-top: 10px;">
+        Welcome, {{ username }}
+    </h2>
+
+    <p style="text-align: center; margin-bottom: 25px; color: #475569;">
+        Please select your assigned role to begin the questionnaire:
+    </p>
+
+    <form action="/select-role" method="POST">
+        <div class="form-group">
+            <label for="role">Select Your Role</label>
+            <select name="role" id="role" required>
+                <option value="" disabled selected>-- Select Role --</option>
+                {% for role in roles %}
+                    <option value="{{ role['role_name'] }}">
+                        {{ role['role_name'] }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-actions" style="margin-top: 25px;">
+            <button type="submit" class="btn-submit" style="width: 100%;">
+                Continue &rarr;
+            </button>
+        </div>
+    </form>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="/logout" style="color: #64748b; font-size: 0.9rem; text-decoration: none;">
+            ← Logout
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submission Successful - Clinovo Assessment System</title>
+    
+    <!-- Link to Centralized CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container" style="max-width: 600px; margin-top: 60px; text-align: center;">
+    
+    <div style="font-size: 3.5rem; color: #1d4ed8; margin-bottom: 10px;">✓</div>
+    
+    <h1 style="border-bottom: none; margin-bottom: 20px;">Questionnaire Submitted Successfully</h1>
+
+    <div class="site-info" style="text-align: left; margin-bottom: 30px;">
+        <p><strong>Submission ID:</strong> #{{ submission_id }}</p>
+        <p><strong>Role:</strong> {{ role }}</p>
+        <p><strong>Site:</strong> {{ site }}</p>
+    </div>
+
+    <div class="form-actions" style="margin-top: 25px;">
+        <a href="{{ url_for('role_selection') }}" class="btn-submit" style="text-decoration: none; display: inline-block;">
+            ← Back to Role Selection
+        </a>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('logout') }}" style="color: #64748b; font-size: 0.9rem; text-decoration: none;">
+            Logout
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>
